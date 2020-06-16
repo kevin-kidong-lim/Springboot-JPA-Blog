@@ -6,10 +6,12 @@ import java.util.function.Supplier;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +29,16 @@ public class DemmyControllerTest {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@DeleteMapping("/dummy/user/{id}")
+	public String delete(@PathVariable int id) {
+		try {
+			userRepository.deleteById(id);	
+		}catch(EmptyResultDataAccessException e) {
+			return "delete faile, no search id: " + id;
+		}
+		
+		return "deleted id:" + id;
+	}
 	// email, password update
 	@Transactional
 	@PutMapping("/dummy/user/{id}")
@@ -49,9 +61,14 @@ public class DemmyControllerTest {
 //		userRepository.save(user);
 //		세번째 방법, save 대신에  @Transational 오노데이션 추가 : 더티채킹
 		// 더티 채킹 이란 ?
-		// 
+		// JPA 영속성 컨텍스트 
+		// controller -->(cache) jpa  (flush)---> DB
+		// controller 에서 검색시에 우선 jpa(cache)에서 검색 없으면 DB
+		// update 시에는  db select > cache > update > flush > db
+		// @Transactinal 은 트랙젝샌이 실행됨 (변경된 내용이 있을경우만 ...실행됨!!).. 함수가 종료딜때 자동 commit ;;  <-- 더티 채킹 .
 		
-		return null;
+		
+		return user;
 	}
 	
 	// http://localhost:8000/blog/dummy/user
