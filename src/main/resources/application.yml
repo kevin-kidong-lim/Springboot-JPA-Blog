@@ -1,6 +1,41 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /blog
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+#http://localhost:8000/blog/http/lombok
 spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+      
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
     username: cos
     password: cos1234
+    
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: update 
+      # create : 기존에 존재해도 다시 생성한다., update : 기존 업데이트 ,>> 첨에는 create 이후는 update로 바꿔서 ,.
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        # @Entity 그대로 테이블 필드를 만들어준다 .
+      use-new-id-generator-mappings: false
+      # jpa 에서 사용하는 넘버링 을 사용안함.
+    show-sql: true
+    # 콘솔창에 로깅을 위해서 ..
+    properties:
+      hibernate.format_sql: true
+      # 이쁘게 정렬 
+ 
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+      
