@@ -31,7 +31,7 @@ public class User {
 	@Id // primary key
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에서 연결된 db 의 넘버링 전략 사용 
 	private int id; // sequence , auto_increment
-	
+	// unique=true
 	@Column(nullable=false, length=30)
 	private String userName;
 	
