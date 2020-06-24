@@ -7,11 +7,11 @@
 	<form>
 		<div class="form-group">
 			<label for="userName">UserName:</label> <input type="text"
-				class="form-control" placeholder="Enter UserName" id="userName">
+				class="form-control" placeholder="Enter UserName" id="username" name="username">
 		</div>
 		<div class="form-group">
 			<label for="password">Password:</label> <input type="password"
-				class="form-control" placeholder="Enter password" id="password">
+				class="form-control" placeholder="Enter password" id="password" name="password">
 		</div>
 		<div class="form-group">
 			<label for="email">Email address:</label> <input type="email"
@@ -24,4 +24,4 @@
 
 <br />
 <%@ include file="../layout/footer.jsp"%>
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>

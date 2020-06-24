@@ -9,7 +9,7 @@ import lombok.Setter;
 //@Getter
 //@Setter
 //get,set both
-@Data  
+@Data
 //constructor
 //@AllArgsConstructor  
 //@RequiredArgsConstructor 
@@ -18,12 +18,12 @@ import lombok.Setter;
 // 빈생성자 
 
 public class Member {
-	
-	private  int id;
+
+	private int id;
 	private final String userName;
 	private final String password;
 	private final String email;
-	
+
 	@Builder // 객체를 자동 증가하는것을 만들때..
 	public Member(int id, String userName, String password, String email) {
 		super();
@@ -32,6 +32,5 @@ public class Member {
 		this.password = password;
 		this.email = email;
 	}
-	
-	
+
 }
